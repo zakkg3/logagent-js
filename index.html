@@ -84,21 +84,20 @@
     
         <li class="main "><a href="#installation">Installation</a></li>
         
-            <li><a href="#install-nodejs">Install Node.js</a></li>
+            <li><a href="#preparation-install-nodejs">Preparation: Install Node.js</a></li>
         
-            <li><a href="#install-logagent-js">Install logagent-js</a></li>
+    
+        <li class="main "><a href="#install-logagent-js-with-npm">Install logagent-js with npm</a></li>
         
-            <li><a href="#logagent-as-linux-or-mac-os-x-service">Logagent as Linux or Mac OS X service</a></li>
+            <li><a href="#install-logagent-as-linux-or-mac-os-x-service-for-logsene">Install logagent as Linux or Mac OS X service for Logsene</a></li>
         
-            <li><a href="#logagent-as-syslog-service-for-docker-logs">Logagent as syslog service for Docker logs</a></li>
+            <li><a href="#install-logagent-as-syslog-container-for-docker-logs">Install logagent as syslog container for Docker logs</a></li>
+        
+            <li><a href="#install-logagent-as-heroku-log-drain">Install logagent as Heroku log drain</a></li>
         
             <li><a href="#command-line-parameters-for-logagent">Command Line Parameters for logagent</a></li>
         
-    
-        <li class="main "><a href="#command-line-examples">Command Line Examples</a></li>
-        
-    
-        <li class="main "><a href="#logagent-as-heroku-log-drain">Logagent as Heroku log drain</a></li>
+            <li><a href="#command-line-examples">Command Line Examples</a></li>
         
     
         <li class="main "><a href="#log-parser-and-pattern-definitions">Log Parser and pattern definitions</a></li>
@@ -176,29 +175,34 @@
 <li>logagent-js is part of <a href="https://github.com/sematext/spm-agent-docker">SPM for Docker</a> to parse Container Logs</li>
 </ul>
 <h1 id="installation">Installation</h1>
-<h2 id="install-nodejs">Install Node.js</h2>
+<h2 id="preparation-install-nodejs">Preparation: Install Node.js</h2>
 <p>Official Node.js <a href="https://nodejs.org/en/download/">downloads and instructions</a>.
 E.g. for Debian/Ubuntu:</p>
 <pre><code>curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install -y nodejs
 </code></pre>
 
-<h2 id="install-logagent-js">Install logagent-js</h2>
+<h1 id="install-logagent-js-with-npm">Install logagent-js with npm</h1>
 <pre><code>npm i -g logagent-js
-# ship all your logs to Logsene, parsed with timestamps - output on console in YAML format (-y)
-logagent -t LOGSENE_TOKEN -y /var/log/*.log
+# Test to ship your logs to Logsene, parsed with timestamps - output on console in YAML format (-y)
+logagent -y /var/log/*.log
 </code></pre>
 
-<h2 id="logagent-as-linux-or-mac-os-x-service">Logagent as Linux or Mac OS X service</h2>
-<p>Logagent detects the init system and installs systemd or upstart service scripts. 
-On Mac OS X it creates a launchd service. Simply run:</p>
+<h2 id="install-logagent-as-linux-or-mac-os-x-service-for-logsene">Install logagent as Linux or Mac OS X service for Logsene</h2>
+<ol>
+<li>Get a free account at <a href="https://apps.sematext.com/users-web/register.do">sematext.com/spm</a>  </li>
+<li><a href="https://apps.sematext.com/logsene-reports/registerApplication.do">create a Logsene App</a> to obtain an App Token for <a href="http://www.sematext.com/logsene/">Logsene</a> </li>
+<li>Install logagnet as system service
+Logagent detects the init system and installs systemd or upstart service scripts. 
+On Mac OS X it creates a launchd service. Simply run:</li>
+</ol>
 <pre><code>npm i logagent-js -g # install logagent package globally
 sudo logagent-setup LOGSENE_TOKEN
 </code></pre>
 
 <p>The setup script generates a configuraton file in <code>/etc/sematext/logagent.conf</code>.
 This file includes the CLI parameters for logagent running as service.
-The default settings ship all logs from <code>/var/log/**/*.log</code> to Logsene. </p>
+The default settings ship all logs from <code>`/var/log/**/*.log</code> to Logsene. </p>
 <p>Location of service scripts:
 - upstart: /etc/init/logagent.conf
 - systemd: /etc/systemd/system/logagent.service
@@ -207,7 +211,7 @@ The default settings ship all logs from <code>/var/log/**/*.log</code> to Logsen
 - upstart: <code>service logagent stop/start</code>
 - systemd: <code>systemctl stop/start logagent</code>
 - lauchnchd: <code>launchctl start/stop com.sematext.logagent</code></p>
-<h2 id="logagent-as-syslog-service-for-docker-logs">Logagent as syslog service for Docker logs</h2>
+<h2 id="install-logagent-as-syslog-container-for-docker-logs">Install logagent as syslog container for Docker logs</h2>
 <p>Build the image and start logagent with the LOGSENE_TOKEN</p>
 <pre><code>git clone https://github.com/sematext/logagent-js.git
 cd logagent-js
@@ -242,6 +246,36 @@ docker run -p 8080:80 -p 514:514/udp -e LOGAGENT_OPTIONS -e LOGSENE_TOKEN=YOUR_L
 <li>Set Node.js Memory limits</li>
 </ul>
 <pre><code>-e NODE_OPTIONS=&quot;--max-old-space-size=200&quot;
+</code></pre>
+
+<h2 id="install-logagent-as-heroku-log-drain">Install logagent as Heroku log drain</h2>
+<p><a href="http://www.heroku.com">Heroku</a> can forward logs to a <a href="https://devcenter.heroku.com/articles/log-drains">Log Drain</a> </p>
+<pre><code>heroku drain:add --app HerokuAppName URL 
+</code></pre>
+
+<p>To receive Heroku logs, logagent-js can be deployed to Heroku. It acts as HTTPS log drain. </p>
+<ol>
+<li>Get a free account <a href="https://apps.sematext.com/users-web/register.do">apps.sematext.com</a>  </li>
+<li>Create a <a href="http://www.sematext.com/logsene/">Logsene</a> App to obtain the Logsene Token</li>
+<li>Deploy logagent-js to Heroku </li>
+</ol>
+<p><a href="https://heroku.com/deploy?template=https://github.com/sematext/logagent-js"><img alt="Deploy" src="https://www.herokucdn.com/deploy/button.png" /></a> or use the following commands:</p>
+<p><code>git clone https://github.com/sematext/logagent-js.git
+  cd logagent-js
+  heroku login 
+  heroku create
+  git push heroku master</code>
+4. Add the the log drain.<br />
+  The URL format is https://loggerAppName.herokuapps.com/LOGSENE_TOKEN
+  Use following command, using the dynamically given name from "heroku create".</p>
+<p><code>export LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN
+  heroku drains:add --app YOUR_HEROKU_MAIN_APPLICATION  `heroku info -s | grep web-url | cut -d= -f2`$LOGSENE_TOKEN</code>
+Now you can see your logs in Logsene, define Alert-Queries or use Kibana 4 for Dashboards. </p>
+<ol>
+<li>Scale logagent-js service on Heroku</li>
+</ol>
+<p>In case of high log volume, scale logagent-js  on demand using </p>
+<pre><code>heroku scale web=3
 </code></pre>
 
 <h2 id="command-line-parameters-for-logagent">Command Line Parameters for logagent</h2>
@@ -312,7 +346,7 @@ docker run -p 8080:80 -p 514:514/udp -e LOGAGENT_OPTIONS -e LOGSENE_TOKEN=YOUR_L
 </tbody>
 </table>
 <p>The default output is line delimited JSON.</p>
-<h1 id="command-line-examples">Command Line Examples</h1>
+<h2 id="command-line-examples">Command Line Examples</h2>
 <pre><code># Be Evil: parse all logs 
 # stream logs to Logsene 1-Click ELK stack 
 logagent -t LOGSENE_TOKEN /var/log/*.log 
@@ -344,36 +378,6 @@ logagent -s -t $LOGSENE_TOKEN --rtail-web-port 8080 --rtail-port 9999 /var/log/*
 
 <p>And of course you can combine rtail and Logagent in the traditional way, simply connect both via unix pipes. An example with rtail and Logsene storage and charts:
 <img alt="" src="http://g.recordit.co/usjLitb3Dd.gif" /></p>
-<h1 id="logagent-as-heroku-log-drain">Logagent as Heroku log drain</h1>
-<p><a href="http://www.heroku.com">Heroku</a> can forward logs to a <a href="https://devcenter.heroku.com/articles/log-drains">Log Drain</a> </p>
-<pre><code>heroku drain:add --app HerokuAppName URL 
-</code></pre>
-
-<p>To receive Heroku logs, logagent-js can be deployed to Heroku. It acts as HTTPS log drain. </p>
-<ol>
-<li>Get a free account <a href="https://apps.sematext.com/users-web/register.do">apps.sematext.com</a>  </li>
-<li>Create a <a href="http://www.sematext.com/logsene/">Logsene</a> App to obtain the Logsene Token</li>
-<li>Deploy logagent-js to Heroku </li>
-</ol>
-<p><a href="https://heroku.com/deploy?template=https://github.com/sematext/logagent-js"><img alt="Deploy" src="https://www.herokucdn.com/deploy/button.png" /></a> or use the following commands:</p>
-<p><code>git clone https://github.com/sematext/logagent-js.git
-  cd logagent-js
-  heroku login 
-  heroku create
-  git push heroku master</code>
-4. Add the the log drain.<br />
-  The URL format is https://loggerAppName.herokuapps.com/LOGSENE_TOKEN
-  Use following command, using the dynamically given name from "heroku create".</p>
-<p><code>export LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN
-  heroku drains:add --app YOUR_HEROKU_MAIN_APPLICATION  `heroku info -s | grep web-url | cut -d= -f2`$LOGSENE_TOKEN</code>
-Now you can see your logs in Logsene, define Alert-Queries or use Kibana 4 for Dashboards. </p>
-<ol>
-<li>Scale logagent-js service on Heroku</li>
-</ol>
-<p>In case of high log volume, scale logagent-js  on demand using </p>
-<pre><code>heroku scale web=3
-</code></pre>
-
 <h1 id="log-parser-and-pattern-definitions">Log Parser and pattern definitions</h1>
 <h2 id="how-does-the-parser-work">How does the parser work?</h2>
 <p>The parser detects log formats based on a pattern library (yaml file) and converts it to a JSON Object:</p>
@@ -533,5 +537,5 @@ lp.parseLine('log message', 'source name', function (err, data) {
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-05-09 07:56:49.829649
+Build Date UTC : 2016-05-09 08:05:56.646170
 -->
