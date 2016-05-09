@@ -9,4 +9,36 @@
     </url>
     
 
+    
+    <url>
+     <loc>None/installation/</loc>
+     <lastmod>2016-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/cli-parameters/</loc>
+     <lastmod>2016-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/parser/</loc>
+     <lastmod>2016-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/nodejs-api/</loc>
+     <lastmod>2016-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
 </urlset>
