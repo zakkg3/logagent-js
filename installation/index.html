@@ -70,11 +70,11 @@
                 <li class="toctree-l3"><a href="#preparation-install-nodejs">Preparation: Install Node.js</a></li>
                 
             
-                <li class="toctree-l3"><a href="#install-logagent-js-with-npm">Install logagent-js with npm</a></li>
+                <li class="toctree-l3"><a href="#logagnet-command-line-tool-with-npm">Logagnet command line tool with npm</a></li>
                 
-                    <li><a class="toctree-l4" href="#install-logagent-as-linux-or-mac-os-x-service-for-logsene">Install logagent as Linux or Mac OS X service for Logsene</a></li>
+                    <li><a class="toctree-l4" href="#linux-or-mac-os-x-service-for-logsene">Linux or Mac OS X service for Logsene</a></li>
                 
-                    <li><a class="toctree-l4" href="#install-logagent-as-syslog-container-for-docker-logs">Install logagent as syslog container for Docker logs</a></li>
+                    <li><a class="toctree-l4" href="#docker-receive-logs-via-syslog">Docker - receive logs via syslog</a></li>
                 
                     <li><a class="toctree-l4" href="#install-logagent-as-heroku-log-drain">Install logagent as Heroku log drain</a></li>
                 
@@ -148,13 +148,13 @@ E.g. for Debian/Ubuntu:</p>
 sudo apt-get install -y nodejs
 </code></pre>
 
-<h1 id="install-logagent-js-with-npm">Install logagent-js with npm</h1>
+<h1 id="logagnet-command-line-tool-with-npm">Logagnet command line tool with npm</h1>
 <pre><code>npm i -g logagent-js
 # Test to ship your logs to Logsene, parsed with timestamps - output on console in YAML format (-y)
 logagent -y /var/log/*.log
 </code></pre>
 
-<h2 id="install-logagent-as-linux-or-mac-os-x-service-for-logsene">Install logagent as Linux or Mac OS X service for Logsene</h2>
+<h2 id="linux-or-mac-os-x-service-for-logsene">Linux or Mac OS X service for Logsene</h2>
 <ol>
 <li>Get a free account at <a href="https://apps.sematext.com/users-web/register.do">sematext.com/spm</a>  </li>
 <li><a href="https://apps.sematext.com/logsene-reports/registerApplication.do">create a Logsene App</a> to obtain an App Token for <a href="http://www.sematext.com/logsene/">Logsene</a> </li>
@@ -177,7 +177,7 @@ The default settings ship all logs from <code>`/var/log/**/*.log</code> to Logse
 - upstart: <code>service logagent stop/start</code>
 - systemd: <code>systemctl stop/start logagent</code>
 - lauchnchd: <code>launchctl start/stop com.sematext.logagent</code></p>
-<h2 id="install-logagent-as-syslog-container-for-docker-logs">Install logagent as syslog container for Docker logs</h2>
+<h2 id="docker-receive-logs-via-syslog">Docker - receive logs via syslog</h2>
 <p>Build the image and start logagent with the LOGSENE_TOKEN</p>
 <pre><code>git clone https://github.com/sematext/logagent-js.git
 cd logagent-js
@@ -214,6 +214,7 @@ docker run -p 8080:80 -p 514:514/udp -e LOGAGENT_OPTIONS -e LOGSENE_TOKEN=YOUR_L
 <pre><code>-e NODE_OPTIONS=&quot;--max-old-space-size=200&quot;
 </code></pre>
 
+<p>Please note <a href="https://hub.docker.com/r/sematext/sematext-agent-docker/">Sematext Agent Docker</a> might be of interest if you like to collect logs, events and metrics from Docker. </p>
 <h2 id="install-logagent-as-heroku-log-drain">Install logagent as Heroku log drain</h2>
 <p><a href="http://www.heroku.com">Heroku</a> can forward logs to a <a href="https://devcenter.heroku.com/articles/log-drains">Log Drain</a> </p>
 <pre><code>heroku drain:add --app HerokuAppName URL 
