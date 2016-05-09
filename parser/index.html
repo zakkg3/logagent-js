@@ -148,40 +148,39 @@
 <li>default patterns for many applications (see below)</li>
 <li>Heroku logs</li>
 </ul>
-<p>The default pattern definition file include already patterns for:
-- MongoDB, 
-  - MySQL, 
-  - Nginx, 
-  - Redis, 
-  - Elasticsearch
-  - Apache 
-    - Webserver (httpd), 
-    - Zookeeper, 
-    - Cassandra, 
-    - Kafka,
-    - HBase HDFS Data Node,
-    - HBase Region Server,
-    - Hadoop YARN Node Manager, 
-    - Apache SOLR,
-  - various Linux/Mac OS X system log files </p>
+<p>The default pattern definition file include already patterns for:</p>
+<ul>
+<li>MongoDB, </li>
+<li>MySQL, </li>
+<li>Nginx, </li>
+<li>Redis, </li>
+<li>Elasticsearch</li>
+<li>Webserver (nginx, apache httpd), </li>
+<li>Zookeeper, </li>
+<li>Cassandra, </li>
+<li>Kafka,</li>
+<li>HBase HDFS Data Node,</li>
+<li>HBase Region Server,</li>
+<li>Hadoop YARN Node Manager, </li>
+<li>Apache SOLR,</li>
+<li>various Linux/Mac OS X system log files </li>
+</ul>
 <p>The file format is based on <a href="https://nodeca.github.io/js-yaml/">JS-YAML</a>, in short:</p>
+<pre><code>- - indicates an  array
+- !js/regexp - indicates a JS regular expression
+- !!js/function &gt; - indicates a JS function 
+</code></pre>
+
+<p>Properties:</p>
 <ul>
-<li>
-<ul>
-<li>indicates an  array</li>
+<li>patterns - the list of patterns, each pattern starts with "-"</li>
+<li>match: A group of patterns for a specific log source</li>
+<li>regex: a JS regular expression </li>
+<li>fields: the field list of extracted match groups from the regex</li>
+<li>type: the type used in Logsene (Elasticsearch Mapping)</li>
+<li>dateFormat: the format of the special fields 'ts', if the date format matches, a new field @timestamp is generated</li>
+<li>transform: a JS function to manipulate the result of regex and date parsing</li>
 </ul>
-</li>
-<li>!js/regexp - indicates a JS regular expression</li>
-<li>!!js/function &gt; - indicates a JS function </li>
-</ul>
-<p>Properties:
-- patterns - the list of patterns, each pattern starts with "-"
-- match: A group of patterns for a specific log source
-- regex: a JS regular expression 
-- fields: the field list of extracted match groups from the regex
-- type: the type used in Logsene (Elasticsearch Mapping)
-- dateFormat: the format of the special fields 'ts', if the date format matches, a new field @timestamp is generated
-- transform: a JS function to manipulate the result of regex and date parsing</p>
 <p>Example:</p>
 <pre><code># Sensitive data can be replaced with a hashcode (sha1)
 # it applies to fields matching the field names by a regular expression
