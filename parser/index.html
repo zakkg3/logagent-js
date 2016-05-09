@@ -84,6 +84,9 @@
                 <li class="toctree-l3"><a href="#how-does-the-parser-work">How does the parser work?</a></li>
                 
             
+                <li class="toctree-l3"><a href="#example">Example</a></li>
+                
+            
             </ul>
         
     </li>
@@ -181,7 +184,7 @@
 <li>dateFormat: the format of the special fields 'ts', if the date format matches, a new field @timestamp is generated</li>
 <li>transform: a JS function to manipulate the result of regex and date parsing</li>
 </ul>
-<p>Example:</p>
+<h1 id="example">Example</h1>
 <pre><code># Sensitive data can be replaced with a hashcode (sha1)
 # it applies to fields matching the field names by a regular expression
 # Note: this function is not optimized (yet) and might take 10-15% of performance
