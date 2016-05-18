@@ -237,7 +237,7 @@ docker run -p 8080:80 -p 514:514/udp -e LOGAGENT_OPTIONS -e LOGSENE_TOKEN=YOUR_L
   Use following command, using the dynamically given name from "heroku create".</p>
 <p><code>export LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN
   heroku drains:add --app YOUR_HEROKU_MAIN_APPLICATION  `heroku info -s | grep web-url | cut -d= -f2`$LOGSENE_TOKEN</code>
-Now you can see your logs in Logsene, define Alert-Queries or use Kibana 4 for Dashboards. </p>
+Now you can see your logs in Logsene, define Alert-Queries or use Kibana for Dashboards. </p>
 <ol>
 <li>Scale logagent-js service on Heroku</li>
 </ol>
