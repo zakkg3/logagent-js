@@ -77,6 +77,9 @@
                 <li class="toctree-l3"><a href="#command-line-parameters-for-logagent">Command Line Parameters for logagent</a></li>
                 
             
+                <li class="toctree-l3"><a href="#environment-variables">Environment variables</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#command-line-examples">Command Line Examples</a></li>
                 
             
@@ -203,6 +206,41 @@
 </tbody>
 </table>
 <p>The default output is line delimited JSON.</p>
+<h2 id="environment-variables">Environment variables</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LOGSENE_TMP_DIR</td>
+<td>Directory to store failed bulk requests, for later re-transmission.</td>
+</tr>
+<tr>
+<td>LOGSENE_LOG_INTERVAL</td>
+<td>Time to collect logs before a bulk request is done. Default 10000 ms (10 seconds)</td>
+</tr>
+<tr>
+<td>LOGSENE_BULK_SIZE</td>
+<td>Maximum size of a bulk request. Default 1000.</td>
+</tr>
+<tr>
+<td>LOGSENE_URL</td>
+<td>URL for the Logsene receiver. For a local Elasticsearch server or for On-Premise version of Logsene. Defaults to Sematext Logsene SaaS receiver https://logsene-receiver.sematext.com/_bulk. Example for Elasticsearch: <code>LOGSENE_URL=http://localhost:9200/_bulk</code></td>
+</tr>
+<tr>
+<td>HTTPS_PROXY</td>
+<td>Proxy URL for https endpoints, like Logsene receiver. <code>export HTTPS_PROXY=http://my-proxy.example</code></td>
+</tr>
+<tr>
+<td>HTTP_PROXY</td>
+<td>Proxy URL for HTTP endpoints (e.g. On-Premises or local Elasticsearch). <code>export HTTP_PROXY=http://my-proxy.example</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="command-line-examples">Command Line Examples</h2>
 <pre><code># Be Evil: parse all logs 
 # stream logs to Logsene 1-Click ELK stack 
