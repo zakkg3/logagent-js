@@ -161,7 +161,7 @@
 </tr>
 <tr>
 <td><strong>-s</strong></td>
-<td>silent, print no logss, only throughput and memory usage on exit</td>
+<td>silent, print no logs, only throughput and memory usage on exit</td>
 </tr>
 <tr>
 <td><strong>-t</strong> token</td>
@@ -185,15 +185,15 @@
 </tr>
 <tr>
 <td><strong>--heroku</strong> PORT</td>
-<td>listens for heroku logs (http drain / framed syslog over http)</td>
+<td>listens for Heroku logs (http drain / framed syslog over http)</td>
 </tr>
 <tr>
 <td><strong>--cfhttp</strong> PORT</td>
-<td>listens for CloudFoundry logs (syslog over http)</td>
+<td>listens for Cloud Foundry logs (syslog over http)</td>
 </tr>
 <tr>
 <td><strong>--rtail-port</strong></td>
-<td>forwards logs via udp to <a href="http://rtail.org/">rtail</a> server</td>
+<td>forwards logs via UDP to <a href="http://rtail.org/">rtail</a> server</td>
 </tr>
 <tr>
 <td><strong>--rtail-host</strong> hostname</td>
@@ -201,7 +201,7 @@
 </tr>
 <tr>
 <td><strong>list of files</strong>, e.g. /var/log/*.log</td>
-<td>watched by <a href="https://www.npmjs.com/package/tail-forever">tail-forever</a> starting at end of file to watch</td>
+<td>watched by <a href="https://www.npmjs.com/package/tail-forever">tail-forever</a> starting at end of file</td>
 </tr>
 </tbody>
 </table>
@@ -221,7 +221,7 @@
 </tr>
 <tr>
 <td>LOGSENE_LOG_INTERVAL</td>
-<td>Time to collect logs before a bulk request is done. Default 10000 ms (10 seconds)</td>
+<td>Time to batch logs before a bulk request is done. Default 10000 ms (10 seconds)</td>
 </tr>
 <tr>
 <td>LOGSENE_BULK_SIZE</td>
@@ -233,7 +233,7 @@
 </tr>
 <tr>
 <td>HTTPS_PROXY</td>
-<td>Proxy URL for https endpoints, like Logsene receiver. <code>export HTTPS_PROXY=http://my-proxy.example</code></td>
+<td>Proxy URL for HTTPS endpoints, like Logsene receiver. <code>export HTTPS_PROXY=http://my-proxy.example</code></td>
 </tr>
 <tr>
 <td>HTTP_PROXY</td>
@@ -245,8 +245,10 @@
 <pre><code># Be Evil: parse all logs 
 # stream logs to Logsene 1-Click ELK stack 
 logagent -t LOGSENE_TOKEN /var/log/*.log 
+
 # Act as syslog server on UDP and forward messages to Logsene
 logagent -u 514 -t LOGSENE_TOKEN  
+
 # Act as syslog server on UDP and write YAML formatted messages to console
 logagent -u 514 -y  
 </code></pre>

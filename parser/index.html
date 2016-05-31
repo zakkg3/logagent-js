@@ -151,22 +151,22 @@
 <li>default patterns for many applications (see below)</li>
 <li>Heroku logs</li>
 </ul>
-<p>The default pattern definition file include already patterns for:</p>
+<p>The default pattern definition file comes with patterns for:</p>
 <ul>
-<li>MongoDB, </li>
-<li>MySQL, </li>
-<li>Nginx, </li>
-<li>Redis, </li>
+<li>MongoDB</li>
+<li>MySQL</li>
+<li>Nginx</li>
+<li>Redis</li>
 <li>Elasticsearch</li>
-<li>Webserver (nginx, apache httpd), </li>
-<li>Zookeeper, </li>
-<li>Cassandra, </li>
-<li>Kafka,</li>
-<li>HBase HDFS Data Node,</li>
-<li>HBase Region Server,</li>
-<li>Hadoop YARN Node Manager, </li>
-<li>Apache SOLR,</li>
-<li>various Linux/Mac OS X system log files </li>
+<li>Webserver (nginx, apache httpd)</li>
+<li>Zookeeper</li>
+<li>Cassandra</li>
+<li>Kafka</li>
+<li>HBase HDFS Data Node</li>
+<li>HBase Region Server</li>
+<li>Hadoop YARN Node Manager</li>
+<li>Apache Solr</li>
+<li>various Linux/Mac OS X system log files</li>
 </ul>
 <p>The file format is based on <a href="https://nodeca.github.io/js-yaml/">JS-YAML</a>, in short:</p>
 <pre><code>- - indicates an  array
@@ -176,27 +176,31 @@
 
 <p>Properties:</p>
 <ul>
-<li>patterns - the list of patterns, each pattern starts with "-"</li>
-<li>match: A group of patterns for a specific log source</li>
-<li>regex: a JS regular expression </li>
-<li>fields: the field list of extracted match groups from the regex</li>
-<li>type: the type used in Logsene (Elasticsearch Mapping)</li>
-<li>dateFormat: the format of the special fields 'ts', if the date format matches, a new field @timestamp is generated</li>
-<li>transform: a JS function to manipulate the result of regex and date parsing</li>
+<li>patterns: list of patterns, each pattern starts with "-"</li>
+<li>match: group of patterns for a specific log source</li>
+<li>regex: JS regular expression </li>
+<li>fields: field list of extracted match groups from the regex</li>
+<li>type: type used in Logsene (Elasticsearch Mapping)</li>
+<li>dateFormat: format of the special fields 'ts', if the date format matches, a new field @timestamp is generated</li>
+<li>transform: JS function to manipulate the result of regex and date parsing</li>
 </ul>
 <h1 id="example">Example</h1>
 <pre><code># Sensitive data can be replaced with a hashcode (sha1)
 # it applies to fields matching the field names by a regular expression
 # Note: this function is not optimized (yet) and might take 10-15% of performance
 autohash: !!js/regexp /user|password|email|credit_card_number|payment_info/i
-# set this to false when authash fields
+
+# set this to false when autohash fields
 # the original line might include sensitive data!
 originalLine: false
+
 # activate GeoIP lookup
 geoIP: true
+
 # logagent updates geoip db files automatically
 # pls. note write access to this directory is required
 maxmindDbDir: /tmp/
+
 patterns: 
   - # APACHE  Web Logs
   sourceName: httpd
@@ -214,7 +218,7 @@ patterns:
         }
 </code></pre>
 
-<p>The default patterns are <a href="https://github.com/sematext/logagent-js/blob/master/patterns.yml">here</a> - contributions are welcome.</p>
+<p>The default patterns are <a href="https://github.com/sematext/logagent-js/blob/master/patterns.yml">here</a> - contributions are welcome!</p>
               
             </div>
           </div>
