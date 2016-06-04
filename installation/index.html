@@ -162,12 +162,13 @@ logagent -y /var/log/*.log
 Logagent detects the init system and installs systemd or upstart service scripts. 
 On Mac OS X it creates a launchd service. Simply run:</li>
 </ol>
-<pre><code>npm i logagent-js -g # install logagent package globally
+<pre><code># install logagent package globally 
+sudo npm i logagent-js -g 
 sudo logagent-setup LOGSENE_TOKEN
 </code></pre>
 
 <p>The setup script generates a configuraton file in <code>/etc/sematext/logagent.conf</code>.
-This file includes the CLI parameters for logagent running as service.
+This file includes the <a href="http://sematext.github.io/logagent-js/cli-parameters/">CLI parameters for logagent</a> running as service.
 The default settings ship all logs from <code>/var/log/**/*.log</code> to Logsene. </p>
 <p>Location of service scripts:
 - upstart: /etc/init/logagent.conf
