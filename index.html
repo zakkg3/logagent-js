@@ -199,8 +199,9 @@
 <p>Logagent doesn't lose data.  It stores parsed logs to a disk buffer if the network connection to the Elasticsearch API fails.  Logagent retries shipping logs later, when the network or Elasticsearch is available again.  </p>
 <h2 id="outputs">Outputs</h2>
 <ul>
-<li>bulk inserts to <a href="http://sematext.com/logsene">Logsene</a> / Elasticsearch API</li>
-<li>JSON, line delimited JSON and YML to standard output  </li>
+<li>bulk inserts to Elasticsearch and <a href="http://sematext.com/logsene">Logsene</a> / Elasticsearch API</li>
+<li>JSON, line delimited JSON and YAML to standard output </li>
+<li>UDP forwarding to rtail server for realtime log view </li>
 </ul>
 <h2 id="deployment-options">Deployment options</h2>
 <ul>
@@ -275,5 +276,5 @@
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-07-05 10:18:43.877813
+Build Date UTC : 2016-07-05 10:22:57.247988
 -->
