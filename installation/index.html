@@ -222,7 +222,7 @@ docker run -p 8080:80 -p 514:514/udp -e LOGAGENT_OPTIONS -e LOGSENE_TOKEN=YOUR_L
 <p>Please note <a href="https://hub.docker.com/r/sematext/sematext-agent-docker/">Sematext Agent Docker</a> might be of interest if you like to collect logs, events and metrics from Docker. </p>
 <h2 id="run-logagent-as-heroku-log-drain">Run Logagent as Heroku Log Drain</h2>
 <p>You can forward your <a href="http://www.heroku.com">Heroku</a> logs to Logsene using Heroku <a href="https://devcenter.heroku.com/articles/log-drains">Log Drain</a> like this:</p>
-<pre><code>heroku drain:add --app HerokuAppName URL
+<pre><code>heroku drains:add --app HerokuAppName URL
 </code></pre>
 
 <p>Here are the steps:</p>
