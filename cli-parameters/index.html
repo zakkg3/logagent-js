@@ -197,6 +197,10 @@
 <td>use a <a href="https://www.npmjs.com/package/glob">glob</a> pattern to watch log files e.g. <code>-g "{/var/log/*.log,/Users/stefan/myapp/*.log}"</code>. The complete glob expression must be quoted, to avoid interpretation of special characters by the linux shell.</td>
 </tr>
 <tr>
+<td>--tailStartPosition bytes</td>
+<td>-1 tail from end of file, &gt;=0 start from given position (in bytes).  This setting applys for new files, having no position saved (see --logsene-tmp-dir)</td>
+</tr>
+<tr>
 <td>--stdin</td>
 <td>read from stdin, default if no other input like files or UDP are set</td>
 </tr>
