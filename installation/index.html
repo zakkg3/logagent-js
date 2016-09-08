@@ -86,7 +86,7 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../cli-parameters/">Command Line Options</a>
+        <a class="" href="../cli-parameters/">Configuration Options</a>
         
     </li>
 <li>
@@ -149,7 +149,7 @@ sudo apt-get install -y nodejs
 </code></pre>
 
 <h1 id="install-logagent">Install Logagent</h1>
-<pre><code>npm i logagent-js -g
+<pre><code>npm i -g @sematext/logagent 
 # Test logs reading parsed with timestamps - output on console in YAML format (-y)
 # tail mode, parse only new lines
 logagent -y /var/log/*.log  
@@ -166,12 +166,12 @@ Logagent detects the init system and installs systemd or upstart service scripts
 On Mac OS X it creates a launchd service. Simply run:</li>
 </ol>
 <pre><code># install logagent package globally 
-sudo npm i logagent-js -g 
+sudo npm i -g @sematext/logagent
 sudo logagent-setup LOGSENE_TOKEN
 </code></pre>
 
 <p>The setup script generates a configuraton file in <code>/etc/sematext/logagent.conf</code>.
-This file includes the <a href="http://sematext.github.io/logagent-js/cli-parameters/">CLI parameters for logagent</a> running as service.
+This file includes the <a href="http://sematext.github.io/logagent-js/cli-parameters/cli-parameters/#config-file">configuration options for logagent</a> running as service.
 The default settings ship all logs from <code>/var/log/**/*.log</code> to Logsene. </p>
 <p>Location of service scripts:
 - upstart: /etc/init/logagent.conf
@@ -181,11 +181,6 @@ The default settings ship all logs from <code>/var/log/**/*.log</code> to Logsen
 - upstart: <code>service logagent stop/start</code>
 - systemd: <code>systemctl stop/start logagent</code>
 - lauchnchd: <code>launchctl start/stop com.sematext.logagent</code></p>
-<p>Uninstall services: 
-The following command stops the logagent service, removes service and configuration files and uninstalls the global logagent-js npm package:</p>
-<pre><code>sudo logagent-uninstall 
-</code></pre>
-
 <h2 id="running-logagent-in-a-docker-container-as-syslog-listener">Running Logagent in a Docker Container as Syslog Listener</h2>
 <p>You can build a Docker image with logagent running in it and activing as a Syslog UDP listener.  Then you can run this as a container.  Once you have this "containerized logagent" you can start all yoour other containers with Syslog driver and point it to the "containerized logagent's" UDP port (514).  Here are the steps:</p>
 <p>Build the docker image, and then run logagent inside it with the given LOGSENE_TOKEN</p>
@@ -227,7 +222,7 @@ docker run -p 8080:80 -p 514:514/udp -e LOGAGENT_OPTIONS -e LOGSENE_TOKEN=YOUR_L
 <p>Please note <a href="https://hub.docker.com/r/sematext/sematext-agent-docker/">Sematext Agent Docker</a> might be of interest if you like to collect logs, events and metrics from Docker. </p>
 <h2 id="run-logagent-as-heroku-log-drain">Run Logagent as Heroku Log Drain</h2>
 <p>You can forward your <a href="http://www.heroku.com">Heroku</a> logs to Logsene using Heroku <a href="https://devcenter.heroku.com/articles/log-drains">Log Drain</a> like this:</p>
-<pre><code>heroku drains:add --app HerokuAppName URL
+<pre><code>heroku drain:add --app HerokuAppName URL
 </code></pre>
 
 <p>Here are the steps:</p>
@@ -265,7 +260,7 @@ Now you can see your logs in Logsene, define Alert-Queries or use Kibana for Das
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../cli-parameters/" class="btn btn-neutral float-right" title="Command Line Options">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../cli-parameters/" class="btn btn-neutral float-right" title="Configuration Options">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href=".." class="btn btn-neutral" title="Features and Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>

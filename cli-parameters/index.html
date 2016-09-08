@@ -8,7 +8,7 @@
   
   
   
-  <title>Command Line Options - logagent-js</title>
+  <title>Configuration Options - logagent-js</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -23,7 +23,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Command Line Options";
+    var mkdocs_page_name = "Configuration Options";
     var mkdocs_page_input_path = "cli-parameters.md";
     var mkdocs_page_url = "/cli-parameters/";
   </script>
@@ -70,14 +70,24 @@
           
             <li>
     <li class="toctree-l1 current">
-        <a class="current" href="./">Command Line Options</a>
+        <a class="current" href="./">Configuration Options</a>
         
             <ul>
             
-                <li class="toctree-l3"><a href="#command-line-parameters-for-logagent">Command Line Parameters for logagent</a></li>
+                <li class="toctree-l3"><a href="#command-line-parameters">Command Line Parameters</a></li>
+                
+                    <li><a class="toctree-l4" href="#synopsis">Synopsis</a></li>
                 
             
-                <li class="toctree-l3"><a href="#synopsis">Synopsis</a></li>
+                <li class="toctree-l3"><a href="#config-file">Config File</a></li>
+                
+                    <li><a class="toctree-l4" href="#section-options">Section: options</a></li>
+                
+                    <li><a class="toctree-l4" href="#section-input">Section: input</a></li>
+                
+                    <li><a class="toctree-l4" href="#section-parser">Section: parser</a></li>
+                
+                    <li><a class="toctree-l4" href="#section-output">Section: output</a></li>
                 
             
                 <li class="toctree-l3"><a href="#environment-variables">Environment variables</a></li>
@@ -127,7 +137,7 @@
     
       
     
-    <li>Command Line Options</li>
+    <li>Configuration Options</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -141,8 +151,8 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="command-line-parameters-for-logagent">Command Line Parameters for logagent</h2>
-<h2 id="synopsis">Synopsis</h2>
+                <h2 id="command-line-parameters">Command Line Parameters</h2>
+<h3 id="synopsis">Synopsis</h3>
 <p><code>logagent [options] [file list]</code></p>
 <table>
 <thead>
@@ -169,23 +179,31 @@
 <td>output activity report every minute</td>
 </tr>
 <tr>
-<td>--geoip <value></td>
+<td>--config <configFileName></td>
+<td>path to logagent config file (see below)</td>
+</tr>
+<tr>
+<td>--geoipEnabled <value></td>
 <td>true/false to enable/disable geoip lookups in patterns.</td>
 </tr>
 <tr>
-<td>--logsene-tmp-dir  path</td>
+<td>--diskBufferDir  path</td>
 <td>directory to store status and buffered logs (during network outage)</td>
 </tr>
 <tr>
+<td>--includeOriginalLine</td>
+<td>includes the original message in parsed logs</td>
+</tr>
+<tr>
 <td>-f, --file <patternFile></td>
-<td>file with pattern definitions</td>
+<td>file with pattern definitions, use multiple -f options multiple files</td>
 </tr>
 <tr>
 <td>-s, --suppress</td>
 <td>silent, print no logs to stdout, prints only stats on exit</td>
 </tr>
 <tr>
-<td>--print_stats</td>
+<td>--printStats</td>
 <td>print processing stats in the given interval in seconds, e.g. <code>--print_stats 30</code> to stderr. Usefull with -s to see logagent activity on the console without printing the parsed logs to stdout.</td>
 </tr>
 <tr>
@@ -197,8 +215,8 @@
 <td>use a <a href="https://www.npmjs.com/package/glob">glob</a> pattern to watch log files e.g. <code>-g "{/var/log/*.log,/Users/stefan/myapp/*.log}"</code>. The complete glob expression must be quoted, to avoid interpretation of special characters by the linux shell.</td>
 </tr>
 <tr>
+<td>+</td>
 <td>--tailStartPosition bytes</td>
-<td>-1 tail from end of file, &gt;=0 start from given position (in bytes).  This setting applys for new files, having no position saved (see --logsene-tmp-dir)</td>
 </tr>
 <tr>
 <td>--stdin</td>
@@ -257,11 +275,11 @@
 <td><a href="http://sematext.com/logsene">Logsene</a> App Token to insert parsed records into Logsene or Elasticsearch index (see --elasticsearch-host)</td>
 </tr>
 <tr>
-<td>--http-proxy <url></td>
+<td>--httpProxy <url></td>
 <td>HTTP proxy url</td>
 </tr>
 <tr>
-<td>--https-proxy <url></td>
+<td>--httpsProxy <url></td>
 <td>HTTPS proxy url</td>
 </tr>
 <tr>
@@ -269,24 +287,125 @@
 <td>Realtime log viewer</td>
 </tr>
 <tr>
-<td>--rtail-port</td>
+<td>--rtailPort</td>
 <td>forwards logs via UDP to <a href="http://rtail.org/">rtail</a> server</td>
 </tr>
 <tr>
-<td>--rtail-host hostname</td>
+<td>--rtailHost hostname</td>
 <td><a href="http://rtail.org/">rtail</a> server (UI for realtime logs), default: localhost</td>
 </tr>
 <tr>
-<td>--rtail-web-port <port></td>
+<td>--rtailWebPort <port></td>
 <td>starts rtail UI webserver (if not installed install with: - npm i rtail -g)</td>
 </tr>
 <tr>
-<td>--rtail-web-host <host></td>
-<td>rtail UI webserver and bind hostname. E.g. <code>logagent --rtail-web-port 9000 --rtail-port 8989  --rtail-web-host $(hostname) -g \'/var/log/**/*.log</code></td>
+<td>--rtailWebHost <host></td>
+<td>rtail UI webserver and bind hostname. E.g. <code>logagent --rtailWebPort 9000 --rtailPort 8989  --rtailWebHost $(hostname) -g \'/var/log/**/*.log</code></td>
 </tr>
 </tbody>
 </table>
 <p>The default output is line delimited JSON for parsed log lines, as long as no format options like -yaml (YAML format), -p (pretty JSON), or -s (silent, no output to console) are specified. </p>
+<h2 id="config-file">Config File</h2>
+<p>The config file needs to be in YAML format.</p>
+<h3 id="section-options">Section: options</h3>
+<pre><code># Global options
+options:
+  # print stats every 60 seconds 
+  printStats: 60
+  # don't write parsed logs to stdout
+  suppress: false
+  # Enalbe/disable GeoIP lookups
+  # Startup of logagent might be slower, when downloading the GeoIP database
+  geoipEnabled: false
+  # Directory to store Logagent status nad temporary files
+  diskBufferDir: ./tmp
+</code></pre>
+
+<h3 id="section-input">Section: input</h3>
+<pre><code>input:
+  # a list of glob patterns to watch files to tail
+  files:
+      - '/var/log/**/*.log'
+      - '/opt/myapp/logs/*.log'
+  # listen to udp syslog protocol  
+  #syslog: 
+  #  port: 514
+  # listen to http to receive data from Heroku  log drains  
+  #heroku: 
+  #  port: 9999
+  # listen to http to receive data from Cloud Foundry drains  
+  #cloudFoundry:
+  #  port: 8888
+</code></pre>
+
+<h3 id="section-parser">Section: parser</h3>
+<p>In this section defines loading of custom pattern files or inline pattern definitions for the log parser.</p>
+<pre><code># optional, if not specified default patterns are used
+parser:
+  patternFiles:
+    # load a list of pattern files to parse logs
+    # later files overwrite settings from previous files
+    # a 'hot reload' is done as soon one of the listed fiels changes on disk
+    - patterns1.yml
+    - patterns2.yml
+  # inline pattern definitions, to put on top of patterns list
+  # loaded from files or default librarary  
+  patterns:
+    - # timestamped messages from /var/log/*.log on Mac OS X
+      sourceName: !!js/regexp /\system\.log/ # catch all system.log files  
+      match:
+        -
+          type: system_log
+          regex: !!js/regexp /([\w|\s]+\s+\d{2}\s[\d|\:]+)\s(.+?)\s(.+?)\s&lt;(.+)&gt;(.*)/
+          fields: [ts,host,service,severity,message]
+          dateFormat: MMM DD HH:mm:ss
+</code></pre>
+
+<h3 id="section-output">Section: output</h3>
+<p>Logs could be shipped to Elasticsearch or to rtail for realtime log view. 
+The Elasticsearch output supports HTTPS, username/password in the url. 
+In addtion it is possible to route logs from different files to different indicies in Elasticsearch. All logs, which don't match the rules in the indices section are routed to the default index (elasticsearch.index). </p>
+<pre><code>output:
+  # index logs in Elasticsearch or Logsene
+  elasticsearch: 
+    # URL to Elasticearch server, defaults to Logsene SaaS if not set
+    url: https://logsene-receiver.sematext.com
+
+    # Proxy settings behind firewalls
+    #httpProxy:  http://localProxy:port
+    #httpsProxy: https://localHttpsProxy:port
+
+    # default index to use, for all logs that don't match later in indices section
+    # for Logsene use the Logsene App Token here
+    index: 0a835c75-9847-4f74-xxxx
+
+    # specific index to use per logSource field of parsed logs
+    # logSource is by default the file name of the log file
+    # but it can be modified by JS transforms functions in the patterns.yml file
+    indices: 
+      4f70a0c7-9458-43e2-bbc5-xxxx: 
+      # list of RegEx mathich logSource / filename  
+      # all logs matching logSOurce name will be indexed to above index
+        - .*wifi.*
+        - .*bluetooth.*
+      999532c9-18f1-4c4b-8753-xxxx: 
+        - system\.log
+        - access\.log
+        - auth\.log
+  # print parsed logs in YAML format to stdout (only if options.supress is set to false)    
+  stdout: yaml # use 'pretty' for pretty json and 'ldjson' for line delimited json (default)
+
+  # forward logs to rtail realtime log viewer
+  #rtail:
+    # rtail host to send logs to
+    #host: localhost
+    # rtails port to send logs to 
+    #udpPort: 3434
+    # start rtail Server with given http port and bind to address of hostname
+    #webPort: 8080
+    #webHost: localhost
+</code></pre>
+
 <h2 id="environment-variables">Environment variables</h2>
 <table>
 <thead>
@@ -333,19 +452,19 @@
 <h2 id="command-line-examples">Command Line Examples</h2>
 <pre><code># Be Evil: parse all logs 
 # stream logs to Logsene 1-Click ELK stack 
-logagent -t LOGSENE_TOKEN /var/log/*.log 
+logagent -i LOGSENE_TOKEN /var/log/*.log 
 
 # Act as syslog server on UDP and forward messages to Logsene
-logagent -u 514 -t LOGSENE_TOKEN  
+logagent -u 514 -i LOGSENE_TOKEN  
 
 # Act as syslog server on UDP and write YAML formatted messages to console
 logagent -u 514 -y  
 </code></pre>
 
 <p>Use a <a href="https://www.npmjs.com/package/glob">glob</a> pattern to build the file list </p>
-<pre><code>logagent -t LOGSENE_TOKEN -g '/var/log/**/*.log'
+<pre><code>logagent -i LOGSENE_TOKEN -g '/var/log/**/*.log'
 # pass multiple glob patterns
-logagent -t LOGSENE_TOKEN -g '{/var/log/*.log,/opt/myapp/*.log}'
+logagent -i LOGSENE_TOKEN -g '{/var/log/*.log,/opt/myapp/*.log}'
 </code></pre>
 
 <p>Watch selective log output on console by passing logs via stdin and format in YAML</p>
@@ -355,13 +474,13 @@ tail -f /var/log/system.log | logagent -f my_own_patterns.yml  -y
 
 <p>Ship logs to rtail and Logsene to view logs in real-time in rtail and store logs in Logsene</p>
 <pre><code># rtail don't need to be installed, logagent uses the rtail protocol
-logagent -t $LOGSENE_TOKEN --rtail-host myrtailserver --rtail-port 9999 /var/log/*.log
+logagent -i $LOGSENE_TOKEN --rtail-host myrtailserver --rtail-port 9999 /var/log/*.log
 </code></pre>
 
 <p>Logagent can start the rtail web-server (in-process, saving memory), open browser with http://localhost:8080</p>
 <pre><code># logagent has no dependency to rtail, to keep the package small
 sudo npm i rtail -g
-logagent -s -t $LOGSENE_TOKEN --rtail-web-port 8080 --rtail-port 9999 /var/log/*.log
+logagent -s -i $LOGSENE_TOKEN --rtail-web-port 8080 --rtail-port 9999 /var/log/*.log
 </code></pre>
 
 <p>And of course you can combine rtail and Logagent in the traditional way, simply connect both via unix pipes. An example with rtail and Logsene storage and charts:
