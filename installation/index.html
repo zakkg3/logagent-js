@@ -72,9 +72,9 @@
             
                 <li class="toctree-l3"><a href="#install-logagent">Install Logagent</a></li>
                 
-                    <li><a class="toctree-l4" href="#linux-or-mac-os-x-service-for-logsene">Linux or Mac OS X service for Logsene</a></li>
+                    <li><a class="toctree-l4" href="#install-service-linux-mac-os-x">Install service (Linux, Mac OS X)</a></li>
                 
-                    <li><a class="toctree-l4" href="#running-logagent-in-a-docker-container-as-syslog-listener">Running Logagent in a Docker Container as Syslog Listener</a></li>
+                    <li><a class="toctree-l4" href="#logagent-in-a-docker-container-as-syslog-listener">Logagent in a Docker Container as Syslog Listener</a></li>
                 
                     <li><a class="toctree-l4" href="#run-logagent-as-heroku-log-drain">Run Logagent as Heroku Log Drain</a></li>
                 
@@ -86,7 +86,14 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../cli-parameters/">Configuration Options</a>
+        <a class="" href="../cli-parameters/">Command line arguments</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../config-file/">Configuration file</a>
         
     </li>
 <li>
@@ -100,7 +107,7 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../nodejs-api/">Node.js API</a>
+        <a class="" href="../plugins/">Plugins</a>
         
     </li>
 <li>
@@ -150,14 +157,9 @@ sudo apt-get install -y nodejs
 
 <h1 id="install-logagent">Install Logagent</h1>
 <pre><code>npm i -g @sematext/logagent 
-# Test logs reading parsed with timestamps - output on console in YAML format (-y)
-# tail mode, parse only new lines
-logagent -y /var/log/*.log  
-# parse complete file
-cat /var/log/httpd/access.log | logagent -y -n apache 
 </code></pre>
 
-<h2 id="linux-or-mac-os-x-service-for-logsene">Linux or Mac OS X service for Logsene</h2>
+<h2 id="install-service-linux-mac-os-x">Install service (Linux, Mac OS X)</h2>
 <ol>
 <li>Get a free account at <a href="https://apps.sematext.com/users-web/register.do">sematext.com/spm</a></li>
 <li><a href="https://apps.sematext.com/logsene-reports/registerApplication.do">create a Logsene App</a> to obtain an App Token for <a href="http://www.sematext.com/logsene/">Logsene</a> </li>
@@ -170,8 +172,7 @@ sudo npm i -g @sematext/logagent
 sudo logagent-setup LOGSENE_TOKEN
 </code></pre>
 
-<p>The setup script generates a configuraton file in <code>/etc/sematext/logagent.conf</code>.
-This file includes the <a href="http://sematext.github.io/logagent-js/cli-parameters/cli-parameters/#config-file">configuration options for logagent</a> running as service.
+<p>The setup script generates the configuraton file in <code>/etc/sematext/logagent.conf</code>.
 The default settings ship all logs from <code>/var/log/**/*.log</code> to Logsene. </p>
 <p>Location of service scripts:
 - upstart: /etc/init/logagent.conf
@@ -181,7 +182,7 @@ The default settings ship all logs from <code>/var/log/**/*.log</code> to Logsen
 - upstart: <code>service logagent stop/start</code>
 - systemd: <code>systemctl stop/start logagent</code>
 - lauchnchd: <code>launchctl start/stop com.sematext.logagent</code></p>
-<h2 id="running-logagent-in-a-docker-container-as-syslog-listener">Running Logagent in a Docker Container as Syslog Listener</h2>
+<h2 id="logagent-in-a-docker-container-as-syslog-listener">Logagent in a Docker Container as Syslog Listener</h2>
 <p>You can build a Docker image with logagent running in it and activing as a Syslog UDP listener.  Then you can run this as a container.  Once you have this "containerized logagent" you can start all yoour other containers with Syslog driver and point it to the "containerized logagent's" UDP port (514).  Here are the steps:</p>
 <p>Build the docker image, and then run logagent inside it with the given LOGSENE_TOKEN</p>
 <pre><code>git clone https://github.com/sematext/logagent-js.git
@@ -260,7 +261,7 @@ Now you can see your logs in Logsene, define Alert-Queries or use Kibana for Das
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../cli-parameters/" class="btn btn-neutral float-right" title="Configuration Options">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../cli-parameters/" class="btn btn-neutral float-right" title="Command line arguments">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href=".." class="btn btn-neutral" title="Features and Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>

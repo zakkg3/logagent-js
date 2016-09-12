@@ -70,7 +70,14 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../cli-parameters/">Configuration Options</a>
+        <a class="" href="../cli-parameters/">Command line arguments</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../config-file/">Configuration file</a>
         
     </li>
 <li>
@@ -87,6 +94,9 @@
                 <li class="toctree-l3"><a href="#example">Example</a></li>
                 
             
+                <li class="toctree-l3"><a href="#nodejs-api-for-the-parser">Node.js API for the parser</a></li>
+                
+            
             </ul>
         
     </li>
@@ -94,7 +104,7 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../nodejs-api/">Node.js API</a>
+        <a class="" href="../plugins/">Plugins</a>
         
     </li>
 <li>
@@ -230,6 +240,26 @@ patterns:
 </code></pre>
 
 <p>The default patterns are <a href="https://github.com/sematext/logagent-js/blob/master/patterns.yml">here</a> - contributions are welcome!</p>
+<h1 id="nodejs-api-for-the-parser">Node.js API for the parser</h1>
+<p>Install logagent as local module and save the dependency to your package.json</p>
+<pre><code>npm i logagent-js --save
+</code></pre>
+
+<p>Use the Logparser module in your source code</p>
+<pre><code>var Logparser = require('logagent-js')
+var lp = new Logparser('./patterns.yml')
+lp.parseLine('log message', 'source name', function (err, data) {
+    if(err) {
+      console.log('line did not match any pattern')
+    }
+    console.log(JSON.stringify(data))
+})
+</code></pre>
+
+<p>To test patterns or convert logs from text to JSON use the command line tool 'logagent'. It reads from stdin and outputs line delimited JSON (or pretty JSON or YAML) to the console. In addition, it can forward the parsed objects directly to <a href="http://sematext.com/logsene">Logsene</a> or Elasticsearch.</p>
+<p>Test your patterns:</p>
+<pre><code>cat myapp.log | bin/logagent -y -n myapp -f mypatterns.yml
+</code></pre>
               
             </div>
           </div>
@@ -237,10 +267,10 @@ patterns:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../nodejs-api/" class="btn btn-neutral float-right" title="Node.js API">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../plugins/" class="btn btn-neutral float-right" title="Plugins">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../cli-parameters/" class="btn btn-neutral" title="Configuration Options"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../config-file/" class="btn btn-neutral" title="Configuration file"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -268,10 +298,10 @@ patterns:
           <a href="https://github.com/sematext/logagent-js" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../cli-parameters/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../config-file/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../nodejs-api/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../plugins/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
