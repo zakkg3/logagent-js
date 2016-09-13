@@ -8,7 +8,7 @@
   
   
   
-  <title>Configuration file - logagent-js</title>
+  <title>Configuration file - @sematext/logagent</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -43,7 +43,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> logagent-js</a>
+        <a href="../installation/" class="icon icon-home"> @sematext/logagent</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -56,13 +56,6 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="..">Features and Overview</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
         <a class="" href="../installation/">Installation</a>
         
     </li>
@@ -70,7 +63,14 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../cli-parameters/">Command line arguments</a>
+        <a class="" href="..">Features and Overview</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../cli-parameters/">Usage</a>
         
     </li>
 <li>
@@ -121,7 +121,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">logagent-js</a>
+        <a href="../installation/">@sematext/logagent</a>
       </nav>
 
       
@@ -129,7 +129,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="..">Docs</a> &raquo;</li>
+    <li><a href="../installation/">Docs</a> &raquo;</li>
     
       
     
@@ -151,6 +151,10 @@
 <p>Logagent can be configured via config files in YAML format. 
 To use the config file run:</p>
 <pre><code>logagent --config configFileName.yml
+</code></pre>
+
+<p>When logagent is istalled as <a href="http://sematext.github.io/logagent-js/installation/#install-service-linux-mac-os-x">system service</a> the default config file is located in </p>
+<pre><code>/etc/sematext/logagent.conf
 </code></pre>
 
 <h3 id="section-options">Section: options</h3>
@@ -195,7 +199,7 @@ parser:
     - patterns1.yml
     - patterns2.yml
   # inline pattern definitions, to put on top of patterns list
-  # loaded from files or default librarary  
+  # loaded from files or default librarary. For inline patterns hot reload is not available.  
   patterns:
     - # timestamped messages from /var/log/*.log on Mac OS X
       sourceName: !!js/regexp /\system\.log/ # catch all system.log files  
@@ -251,6 +255,8 @@ In addtion it is possible to route logs from different files to different indici
     #webPort: 8080
     #webHost: localhost
 </code></pre>
+
+<p>A collection of exmaple config files are <a href="https://github.com/sematext/logagent-js/tree/master/config/examples">here</a></p>
               
             </div>
           </div>
@@ -261,7 +267,7 @@ In addtion it is possible to route logs from different files to different indici
         <a href="../parser/" class="btn btn-neutral float-right" title="Log Parser and pattern definitions">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../cli-parameters/" class="btn btn-neutral" title="Command line arguments"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../cli-parameters/" class="btn btn-neutral" title="Usage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
