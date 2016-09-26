@@ -239,7 +239,29 @@ patterns:
         }
 </code></pre>
 
-<p>The default patterns are <a href="https://github.com/sematext/logagent-js/blob/master/patterns.yml">here</a> - contributions are welcome!</p>
+<p>The handling of JSON is different, regular expressions are not matched against JSON data. 
+Logagent parse JSON and provides post processing functions in the pattern definition.
+The following example masks fields in JSON and removes fields from the parsed event. </p>
+<pre><code>hashFunction: sha512
+# post process journald JSON format
+# logagent feature to hash fields
+# and a custom property 'removeFields', used in the transform function
+json: 
+  autohashFields: 
+    - _HOSTNAME: true
+  removeFields: 
+    - _SOURCE_REALTIME_TIMESTAMP
+    - __MONOTONIC_TIMESTAMP
+  transform: !!js/function &gt;
+   function (source, parsedObject, config) {
+     for (var i=0; i&lt;config.removeFields.length; i++) {
+       // console.log('delete ' +config.removeFields[i])
+       delete parsedObject[config.removeFields[i]]
+     }
+   }
+</code></pre>
+
+<p>The default patterns are available <a href="https://github.com/sematext/logagent-js/blob/master/patterns.yml">here</a> - contributions are welcome!</p>
 <h1 id="nodejs-api-for-the-parser">Node.js API for the parser</h1>
 <p>Install logagent as local module and save the dependency to your package.json</p>
 <pre><code>npm i logagent-js --save
