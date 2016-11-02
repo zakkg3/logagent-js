@@ -98,7 +98,7 @@
                 <li class="toctree-l3"><a href="#logagent-plugins">Logagent plugins</a></li>
                 
             
-                <li class="toctree-l3"><a href="#how-it-works">How it works</a></li>
+                <li class="toctree-l3"><a href="#how-plugins-work">How plugins work</a></li>
                 
                     <li><a class="toctree-l4" href="#examples">Examples</a></li>
                 
@@ -106,6 +106,35 @@
             </ul>
         
     </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Filter</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../filters/">About filters</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../input-filter-grep/">Grep input filter</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../output-filter-sql/">SQL output filter</a>
+        
+    </li>
+
+        
+    </ul>
 <li>
           
         </ul>
@@ -146,7 +175,7 @@
               
                 <h1 id="logagent-plugins">Logagent plugins</h1>
 <p>The architecture of logagent is modular and each input or output module is implemented as plugin for the logagent framework. Plugins are loaded on demand depending on the configurations. </p>
-<h1 id="how-it-works">How it works</h1>
+<h1 id="how-plugins-work">How plugins work</h1>
 <ul>
 <li>Logagent checks the configuration file for properties with a "module" key for the nodejs module name. External plugins needs to be installed via npm. </li>
 <li>Plugins are initialized with the logagent configuration from (command line arguments + configuration file) and the event emitter for logagent. Plugins should provide a start and stop method.</li>
@@ -296,6 +325,8 @@ module.exports = OutputStdout
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../filters/" class="btn btn-neutral float-right" title="About filters">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
       
         <a href="../parser/" class="btn btn-neutral" title="Log Parser and pattern definitions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
@@ -327,6 +358,8 @@ module.exports = OutputStdout
       
         <span><a href="../parser/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../filters/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
