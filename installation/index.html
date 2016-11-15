@@ -233,7 +233,7 @@ The default settings ship all logs from <code>/var/log/**/*.log</code> to Logsen
 <p>Start/stop service: 
 - upstart: <code>service logagent stop/start</code>
 - systemd: <code>systemctl stop/start logagent</code>
-- lauchnchd: <code>launchctl start/stop com.sematext.logagent</code></p>
+- launchd: <code>launchctl start/stop com.sematext.logagent</code></p>
 <h2 id="logagent-in-a-docker-container-as-syslog-listener">Logagent in a Docker Container as Syslog Listener</h2>
 <p>You can build a Docker image with logagent running in it and activing as a Syslog UDP listener.  Then you can run this as a container.  Once you have this "containerized logagent" you can start all yoour other containers with Syslog driver and point it to the "containerized logagent's" UDP port (514).  Here are the steps:</p>
 <p>Build the docker image, and then run logagent inside it with the given LOGSENE_TOKEN</p>
