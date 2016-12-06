@@ -8,7 +8,7 @@
   
   
   
-  <title>Grep input filter - @sematext/logagent</title>
+  <title>Windows Installation - @sematext/logagent</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Grep input filter";
-    var mkdocs_page_input_path = "input-filter-grep.md";
-    var mkdocs_page_url = "/input-filter-grep/";
+    var mkdocs_page_name = "Windows Installation";
+    var mkdocs_page_input_path = "windows.md";
+    var mkdocs_page_url = "/windows/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -69,8 +69,15 @@
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../windows/">Windows Installation</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Windows Installation</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#installation-on-windows">Installation on windows</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -139,18 +146,8 @@
 
         
             
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Grep input filter</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#grep-input-filter">Grep Input Filter</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#configuration">Configuration</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../input-filter-grep/">Grep input filter</a>
         
     </li>
 
@@ -186,12 +183,8 @@
     <li><a href="..">Docs</a> &raquo;</li>
     
       
-        
-          <li>Filter &raquo;</li>
-        
-      
     
-    <li>Grep input filter</li>
+    <li>Windows Installation</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -205,31 +198,51 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="grep-input-filter">Grep Input Filter</h1>
-<p>Apply regex to filter raw input from @sematext/logagent before logs are parsed</p>
-<h1 id="configuration">Configuration</h1>
-<p>Add following section to @sematext/logagent configuration file. Please note you could use the plugin with multiple configurations. Output of the first filter is passed into the next one ...: </p>
-<pre><code>input: 
-  files:
-    - '/var/log/**/*.log'
-
-inputFilter:
-  - module: grep
-    config:
-      matchSource: !!js/regexp /myapp.log/
-      include: !!js/regexp /info|error/i
-      exclude: !!js/regexp /test/i
-
-output:
-  elasticsearch:
-    url: http://localhost:9200
-    index: mylogs
-
+                <h1 id="installation-on-windows">Installation on windows</h1>
+<p>1) Download and install node</p>
+<p>Download nodejs from <a href="https://nodejs.org/en/download/">nodejs.org</a> and execute the installer. </p>
+<p>2) Install Logagent and windows event plugin</p>
+<pre><code>npm i -g @sematext/logagent
+npm i -g logagent-input-windows-events
+# run logagent windows version 
+logagent-windows --help 
 </code></pre>
 
-<p>The example above filters all log files with the content "info" or "error", and drops all lines with the keyword "test". </p>
-<p>Run logagent: </p>
-<pre><code>logagent --config myconfig.yml 
+<p>3) Optional service installer</p>
+<p>Create a configuration file for Logagent in </p>
+<pre><code>%ProgramData%\Sematext\logagent.conf
+</code></pre>
+
+<p>(default: c:\ProgramData\sematext\logagent.conf)</p>
+<p>In case you want to store the configuration file in a different directory, enter the new location in the registry:</p>
+<pre><code>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment\LOGAGENT_CONFIG
+</code></pre>
+
+<p>Example config file to collect Windows events to Elasticsearch: </p>
+<pre><code>options:
+  includeOriginalLine: false
+  suppress: true
+
+input:
+  windowsEvent:
+    module: logagent-input-windows-events 
+    # query events every 10 seconds
+    interval: 10
+    maxEvents: 1000
+
+output:  
+  local-es:
+    module: elasticsearch
+    url: http://localhost:9200
+    index: windows_events
+</code></pre>
+
+<p>Run service installer: </p>
+<pre><code>logagent-windows -install
+</code></pre>
+
+<p>To uninstall the service run </p>
+<pre><code>logagent-windows -uninstall
 </code></pre>
               
             </div>
@@ -238,10 +251,10 @@ output:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../output-filter-sql/" class="btn btn-neutral float-right" title="SQL output filter">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../cli-parameters/" class="btn btn-neutral float-right" title="Usage">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../filters/" class="btn btn-neutral" title="About filters"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../installation/" class="btn btn-neutral" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -269,10 +282,10 @@ output:
           <a href="https://github.com/sematext/logagent-js" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../filters/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../installation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../output-filter-sql/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../cli-parameters/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

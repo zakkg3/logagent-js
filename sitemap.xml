@@ -4,7 +4,7 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2016-11-15</lastmod>
+     <lastmod>2016-12-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,15 @@
     
     <url>
      <loc>None/installation/</loc>
-     <lastmod>2016-11-15</lastmod>
+     <lastmod>2016-12-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/windows/</loc>
+     <lastmod>2016-12-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +28,7 @@
     
     <url>
      <loc>None/cli-parameters/</loc>
-     <lastmod>2016-11-15</lastmod>
+     <lastmod>2016-12-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,7 +36,7 @@
     
     <url>
      <loc>None/config-file/</loc>
-     <lastmod>2016-11-15</lastmod>
+     <lastmod>2016-12-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -36,7 +44,7 @@
     
     <url>
      <loc>None/parser/</loc>
-     <lastmod>2016-11-15</lastmod>
+     <lastmod>2016-12-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -45,7 +53,7 @@
         
     <url>
      <loc>None/plugins/</loc>
-     <lastmod>2016-11-15</lastmod>
+     <lastmod>2016-12-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -61,19 +69,19 @@
         
     <url>
      <loc>None/filters/</loc>
-     <lastmod>2016-11-15</lastmod>
+     <lastmod>2016-12-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/input-filter-grep/</loc>
-     <lastmod>2016-11-15</lastmod>
+     <lastmod>2016-12-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/output-filter-sql/</loc>
-     <lastmod>2016-11-15</lastmod>
+     <lastmod>2016-12-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
