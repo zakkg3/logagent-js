@@ -234,6 +234,7 @@ outputFilter:
           WHERE path like &quot;/wp-login%&quot; 
 output:
   elasticsearch:
+    module: elasticsearch
     url: http://localhost:9200
     index: mylogs
 </code></pre>
