@@ -142,12 +142,48 @@
         
             
     <ul class="subnav">
+    <li><span>Input plugins</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="input-plugin-tcp/">TCP input</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="input-plugin-command/">Command input</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="input-plugin-elasticsearch-query/">Elasticsearch query</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
     <li><span>Output plugins</span></li>
 
         
             
     <li class="toctree-l1 ">
         <a class="" href="output-elasticsearch/">Elasticsearch</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="output-plugin-slack/">Slack webhook</a>
         
     </li>
 
@@ -256,6 +292,8 @@
 <li>Syslog Server (UDP) listener - logagent-js can also act as a syslog server and receive Syslog messages via UDP. The parser is applied to the message field. </li>
 <li><a href="https://github.com/sematext/logagent-js#logagent-as-heroku-log-drain">Heroku Log Drain</a> makes it easy to ship Heroku logs to Elasticsearch or <a href="http://www.sematext.com/logsene/">Logsene</a></li>
 <li>Cloud Foundry Log Drain</li>
+<li>Results of periodically executed Elasticsearch queries</li>
+<li>Output of periodically executed commands. </li>
 </ul>
 <h2 id="processing">Processing</h2>
 <ul>
@@ -269,6 +307,7 @@
 <li>bulk inserts to Elasticsearch and <a href="http://sematext.com/logsene">Logsene</a> / Elasticsearch API</li>
 <li>JSON, line delimited JSON and YAML to standard output </li>
 <li>UDP forwarding to rtail server for realtime log view </li>
+<li>Slack webhook for notifications</li>
 </ul>
 <h2 id="deployment-options">Deployment options</h2>
 <ul>
@@ -343,5 +382,5 @@
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2017-02-09 18:22:42.017733
+Build Date UTC : 2017-04-28 18:32:45.740069
 -->

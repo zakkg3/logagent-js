@@ -122,12 +122,48 @@
         
             
     <ul class="subnav">
+    <li><span>Input plugins</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../input-plugin-tcp/">TCP input</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../input-plugin-command/">Command input</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../input-plugin-elasticsearch-query/">Elasticsearch query</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
     <li><span>Output plugins</span></li>
 
         
             
     <li class="toctree-l1 ">
         <a class="" href="../output-elasticsearch/">Elasticsearch</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../output-plugin-slack/">Slack webhook</a>
         
     </li>
 
@@ -227,7 +263,7 @@
 <pre><code># Global options
 input:
   tcp: 
-    module: @sematext/logagent-tcp-input
+    module: input-tcp
     port: 45900
     bindAddress: 0.0.0.0
     sourceName: tcpTest
@@ -359,7 +395,7 @@ module.exports = OutputStdout
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../output-elasticsearch/" class="btn btn-neutral float-right" title="Elasticsearch">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../input-plugin-tcp/" class="btn btn-neutral float-right" title="TCP input">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../parser/" class="btn btn-neutral" title="Log Parser and pattern definitions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -393,7 +429,7 @@ module.exports = OutputStdout
         <span><a href="../parser/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../output-elasticsearch/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../input-plugin-tcp/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

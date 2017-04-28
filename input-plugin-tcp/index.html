@@ -8,7 +8,7 @@
   
   
   
-  <title>SQL output filter - @sematext/logagent</title>
+  <title>TCP input - @sematext/logagent</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "SQL output filter";
-    var mkdocs_page_input_path = "output-filter-sql.md";
-    var mkdocs_page_url = "/output-filter-sql/";
+    var mkdocs_page_name = "TCP input";
+    var mkdocs_page_input_path = "input-plugin-tcp.md";
+    var mkdocs_page_url = "/input-plugin-tcp/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -114,8 +114,17 @@
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../input-plugin-tcp/">TCP input</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">TCP input</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#plugin-tcp-input">Plugin: TCP input</a></li>
+                
+                    <li><a class="toctree-l4" href="#configuration">Configuration</a></li>
+                
+            
+            </ul>
         
     </li>
 
@@ -182,18 +191,8 @@
 
         
             
-    <li class="toctree-l1 current">
-        <a class="current" href="./">SQL output filter</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#sql-output-filter">SQL output filter</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#configuration">Configuration</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../output-filter-sql/">SQL output filter</a>
         
     </li>
 
@@ -223,11 +222,15 @@
     
       
         
-          <li>Filter &raquo;</li>
+          <li>Plugins &raquo;</li>
+        
+      
+        
+          <li>Input plugins &raquo;</li>
         
       
     
-    <li>SQL output filter</li>
+    <li>TCP input</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -241,42 +244,31 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="sql-output-filter">SQL output filter</h1>
-<p>Filter and aggregate parsed logs with SQL </p>
-<p>This applies SQL queries on parsed log events. The result of the query is emitted as new event, while the original events are omitted. </p>
-<p>Using SQL it is very easy to aggregate values, e.g. group HTTP requests by status codes. The SQL WHERE statement is useful to filter events, before they get shipped to Elasticsearch or <a href="https://sematext.com/logsene">Logsene</a>. </p>
-<h1 id="configuration">Configuration</h1>
-<p>Add following section 'outputFilter' to @sematext/logagent configuration file. Please note you could use the plugin with multiple configurations for different event sources. </p>
-<pre><code>input: 
-  files:
-    - '/var/log/*/access.log'
+                <h1 id="plugin-tcp-input">Plugin: TCP input</h1>
+<p>Plugin to receive log data via TCP.
+Optionally it can send parsed JSON back to the client. </p>
+<h2 id="configuration">Configuration</h2>
+<pre><code>input:
+  tcp: 
+    module: input-tcp
+    port: 45900
+    bindAddress: 0.0.0.0
+    sourceName: tcpTest
+    returnResult: false
 
-outputFilter:
-  - module: sql
-    config:
-      source: !!js/regexp /access.log|httpd/
-      interval: 1 # every second
-      queries:
-        - # calculate average page size for different HTTP methods
-          SELECT 'apache_stats' AS _type, 
-                  AVG(size) AS size_avg, 
-                  COUNT(method) AS method_count, 
-                  method as http_method
-          FROM ? 
-          GROUP BY method
-        - # log each request to the login page 
-          SELECT * 
-          FROM ? 
-          WHERE path like &quot;/wp-login%&quot; 
 output:
   elasticsearch:
     module: elasticsearch
     url: http://localhost:9200
-    index: mylogs
+    index: logs
 </code></pre>
 
-<p>Run logagent with your config: </p>
-<pre><code>logagent --config logagent-example-config.yml 
+<p>Start logagent</p>
+<pre><code>logagent --config myconfig.yml
+</code></pre>
+
+<p>Ship logs to the tcp port:</p>
+<pre><code>tail -F  access.log |  nc localhost 45900
 </code></pre>
               
             </div>
@@ -285,8 +277,10 @@ output:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../input-plugin-command/" class="btn btn-neutral float-right" title="Command input">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../input-filter-grep/" class="btn btn-neutral" title="Grep input filter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+        <a href="../plugins/" class="btn btn-neutral" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -314,8 +308,10 @@ output:
           <a href="https://github.com/sematext/logagent-js" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../input-filter-grep/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../plugins/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../input-plugin-command/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
