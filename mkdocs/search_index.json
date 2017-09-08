@@ -2,12 +2,12 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Logagent Documentation\n\n\nLogagent documentation moved to \nwww.sematext.com/docs/loagagent\n.\nPlease contribute to \nsematext/docs\n for documentation updates.", 
+            "text": "Logagent Documentation\n\n\nLogagent documentation moved to \nwww.sematext.com/docs/logagent/\n.\nPlease contribute to \nsematext/docs\n for documentation updates.", 
             "title": "Documentation"
         }, 
         {
             "location": "/#logagent-documentation", 
-            "text": "Logagent documentation moved to  www.sematext.com/docs/loagagent .\nPlease contribute to  sematext/docs  for documentation updates.", 
+            "text": "Logagent documentation moved to  www.sematext.com/docs/logagent/ .\nPlease contribute to  sematext/docs  for documentation updates.", 
             "title": "Logagent Documentation"
         }
     ]
