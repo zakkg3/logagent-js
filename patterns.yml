@@ -388,18 +388,13 @@ patterns:
      dateFormat: DD-MMM-YYYY::hh:mm:ss
 
  - # Postgres
-  sourceName: !!js/regexp /postgres/
+  sourceName: !!js/regexp /postgres|postgis/
   match:
    - type: postgres
-     regex: !!js/regexp /^(\S+\s\S+\s\S+)\s\[\d+\]\s(\S+):\s+([\S|\s]+)/
-     fields: 
-      # todo handle issue with postgres UTC time format
-      # moment.js date format does not handle UTC string
-      - server_time:string
+     regex: !!js/regexp /^(\S+):\s+([\S|\s]+)/
+     fields:
       - severity:string
       - message
-     dateFormat: YYYY-MM-DD hh:mm:ss.ZZ
-
 
  - # CouchDB
   sourceName: !!js/regexp /couchdb/
